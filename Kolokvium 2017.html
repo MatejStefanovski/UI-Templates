@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kolokvium 2017</title>
+    <style>
+        li{
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid black;
+            text-align: center;
+            display: inline-block;
+        }
+        ul{
+            text-align: center;
+            list-style: none;
+            margin-bottom: 120px;
+        }
+        .a{
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            padding: 10px;
+            justify-content: center;
+        }
+        .aa{
+            display: inline-block;
+            border: 1px solid black;
+            padding: 10px;
+            margin-right: 20px;
+            text-align: center;
+            width: 150px;
+            height: 130px;
+        }
+        #modules {
+            margin-top: 40px;
+            text-align: center;
+        }
+        .module {
+            display: inline-block;
+            width: 250px;
+            border: 1px solid black;
+            margin: 10px;
+            vertical-align: top;
+            border-radius: 8px;
+        }
+        .module h3 {
+            background-color: #ddd;
+            margin: 0;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .module .content {
+            display: none;
+            padding: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="jquery/jquery-ui.css">
+    <script src="jquery/jquery.js"></script>
+    <script src="jquery/jquery-ui.js"></script>
+</head>
+<body>
+    <ul>
+        <li id="1">Compact Digital Cameras</li>
+        <li id="2">DSLR Cameras</li>
+        <li id="3">Speedlite Flashes</li>
+    </ul>
+    <div id="modules">
+        <div class="module">
+            <h3>Services & Apps</h3>
+            <div class="content">
+                <p>Information about related services and apps...</p>
+            </div>
+        </div>
+
+        <div class="module">
+            <h3>Get Inspired</h3>
+            <div class="content">
+                <p>Creative ideas and inspiration related to the products...</p>
+            </div>
+        </div>
+
+        <div class="module">
+            <h3>Support</h3>
+            <div class="content">
+                <p>Help, FAQs, and contact information for assistance...</p>
+            </div>
+        </div>
+    </div>
+    <div id="k1">
+        <button class="home">HOME</button>
+        <div class="a">
+            <div class="aa">
+                <p>Compact Digital Cameras</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="aa">
+                <p>Ime na proizvod</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="aa">
+                <p>Ime na proizvod</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+        </div>
+        <div class="a">
+            <div class="aa">
+                <p>Ime na proizvod</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="aa">
+                <p>Ime na proizvod</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="aa">
+                <p>Ime na proizvod</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="k2">
+        <button class="home">HOME</button>
+        <div class="a">
+            <div class="aa">
+                <p>DSLR Cameras</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="aa">
+                <p>Ime na proizvod</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="aa">
+                <p>Ime na proizvod</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+        </div>
+        <div class="a">
+            <div class="aa">
+                <p>Ime na proizvod</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="aa">
+                <p>Ime na proizvod</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="aa">
+                <p>Ime na proizvod</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="k3">
+        <button class="home">HOME</button>
+        <div class="a">
+            <div class="aa">
+                <p>Speedlite Flashes</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="aa">
+                <p>Ime na proizvod</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="aa">
+                <p>Ime na proizvod</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+        </div>
+        <div class="a">
+            <div class="aa">
+                <p>Ime na proizvod</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="aa">
+                <p>Ime na proizvod</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="aa">
+                <p>Ime na proizvod</p>
+                <img src="#" alt="Slika">
+                <br><br>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $(".aa>button").hide();
+            $("#k1, #k2, #k3").hide();
+            $(".aa").hover(function() {
+                $(this).find("button").show();
+            }, function() {
+                $(this).find("button").hide();
+            });
+            $("ul>li").click(function(){
+                var pr=$(this).attr("id");
+                $("#k1, #k2, #k3").hide();
+                $("#k" + pr).show();
+                $("ul").hide();
+                $(".home").show();
+            })
+            $(".home").click(function(){
+                $("ul").show();
+                $("#k1, #k2, #k3").hide();
+                $(".home").hide();
+            })
+            $(".module").click(function(){
+                $(this).find(".content").slideToggle();
+            });
+        })
+    </script>
+</body>
+</html>

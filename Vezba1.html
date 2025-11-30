@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vezba1</title>
+    <link rel="stylesheet" href="jquery/jquery-ui.css">
+    <script src="jquery/jquery.js"></script>
+    <script src="jquery/jquery-ui.js"></script>
+    <style>
+        #panel2, #panel3{
+            display: none;
+        }
+        #panel1>input{
+            margin-bottom: 10px;
+        }
+        #panel2>input{
+            margin-bottom: 10px;
+        }
+        #panel3>input{
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="panel1">
+        <p>Panel 1</p>
+        <input type="email" placeholder="E-mail"><br>
+        <input type="password" placeholder="Password"><br>
+        <button id="next1">next</button>
+    </div>
+    <div id="panel2">
+        <p>Panel 2</p>
+        <input type="checkbox"> чекбокс<br>
+        <input type="password" placeholder="Password"><br>
+        <button id="prev2">prev</button>
+        <button id="next2">next</button>
+    </div>
+    <div id="panel3">
+        <p>Panel 3</p>
+        <input type="search" placeholder="Search"><br>
+        <button id="prev3">prev</button>
+        <button id="finish">finish</button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#next1").click(function() {
+                $("#panel1").hide();
+                $("#panel2").show();
+            })
+            $("#next2").click(function() {
+                $("#panel2").hide();
+                $("#panel3").show();
+            })
+            $("#prev2").click(function() {
+                $("#panel2").hide();
+                $("#panel1").show();
+            })
+            $("#prev3").click(function() {
+                $("#panel3").hide();
+                $("#panel2").show();
+            })
+            $("#finish").click(function() {
+                $("#panel1").show();
+                $("#panel2").hide();
+                $("#panel3").hide();
+                alert("Finished")
+            })
+        })
+    </script>
+</body>
+</html>

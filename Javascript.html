@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <p id="a1">Tekst</p>
+    <button>
+        Click me
+    </button>
+    <script>
+        document.getElementById("a1").innerHTML = "tekst";
+        $(document).ready(function(){
+            $("button").click(function(){
+                $('p').css('background-color', 'red');
+            })
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kolokvium 2021</title>
+    <link rel="stylesheet" href="jquery/jquery-ui.css">
+    <script src="jquery/jquery.js"></script>
+    <script src="jquery/jquery-ui.js"></script>
+    <style>
+        ul{
+            list-style-type: none;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+        ul li{
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid black;
+        }
+        .a{
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: center;
+            text-align: center;
+        }
+        .aa{
+            display: inline-block;
+            border: 1px solid black;
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <ul id="main">
+        <li id="1">Babolat</li>
+        <li id="2">Head</li>
+        <li id="3">Wilson</li>
+        <li id="4">Prince</li>
+    </ul>
+    <div id="nav">
+        <button id="prev">prev</button>
+        <button id="top">top</button>
+        <button id="next">next</button>
+    </div>
+    <div id="k1">
+        <div class="a">
+            <div class="aa">
+                <p>Ime1 WWW</p>
+                <img src="#" alt="Slika">
+                <br>
+                <button>Score</button>
+                <button class="kopce2">See more</button>
+            </div>
+            <div class="aa">
+                <p>Ime1</p>
+                <img src="#" alt="Slika">
+                <br>
+                <button>Score</button>
+                <button class="kopce2">See more</button>
+            </div>
+            <div class="aa">
+                <p>Ime1</p>
+                <img src="#" alt="Slika">
+                <br>
+                <button>Score</button>
+                <button class="kopce2">See more</button>
+            </div>
+        </div>
+    </div>
+    <div id="k2">
+        <div class="a">
+            <div class="aa">
+                <p>Ime1 RRR</p>
+                <img src="#" alt="Slika">
+                <br>
+                <button>Score</button>
+                <button class="kopce2">See more</button>
+            </div>
+            <div class="aa">
+                <p>Ime1</p>
+                <img src="#" alt="Slika">
+                <br>
+                <button>Score</button>
+                <button class="kopce2">See more</button>
+            </div>
+            <div class="aa">
+                <p>Ime1</p>
+                <img src="#" alt="Slika">
+                <br>
+                <button>Score</button>
+                <button class="kopce2">See more</button>
+            </div>
+        </div>
+    </div>
+    <div id="k3">
+        <div class="a">
+            <div class="aa">
+                <p>Ime1 TTT</p>
+                <img src="#" alt="Slika">
+                <br>
+                <button>Score</button>
+                <button class="kopce2">See more</button>
+            </div>
+            <div class="aa">
+                <p>Ime1</p>
+                <img src="#" alt="Slika">
+                <br>
+                <button>Score</button>
+                <button class="kopce2">See more</button>
+            </div>
+            <div class="aa">
+                <p>Ime1</p>
+                <img src="#" alt="Slika">
+                <br>
+                <button>Score</button>
+                <button class="kopce2">See more</button>
+            </div>
+        </div>
+    </div>
+    <div id="k4">
+        <div class="a">
+            <div class="aa">
+                <p>Ime1 FFF</p>
+                <img src="#" alt="Slika">
+                <br>
+                <button>Score</button>
+                <button class="kopce2">See more</button>
+            </div>
+            <div class="aa">
+                <p>Ime1</p>
+                <img src="#" alt="Slika">
+                <br>
+                <button>Score</button>
+                <button class="kopce2">See more</button>
+            </div>
+            <div class="aa">
+                <p>Ime1</p>
+                <img src="#" alt="Slika">
+                <br>
+                <button>Score</button>
+                <button class="kopce2">See more</button>
+            </div>
+        </div>
+    </div>
+    <div id="dialog">
+        <p id="ime"></p>
+        <input type="text">
+    </div>
+    <div id="accordion">
+        <h3>Section 1</h3>
+        <div>
+            <p>
+                Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+        </div>
+        <h3>Section 2</h3>
+        <div>
+            <p>
+                Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                suscipit faucibus urna.
+            </p>
+        </div>
+        <h3>Section 3</h3>
+        <div>
+            <p>
+                Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+                ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+                lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+            </p>
+            <ul>
+                <li>List item one</li>
+                <li>List item two</li>
+                <li>List item three</li>
+            </ul>
+        </div>
+        <h3>Section 4</h3>
+        <div>
+            <p>
+                Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+                et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+                faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+                mauris vel est.
+            </p>
+            <p>
+                Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                inceptos himenaeos.
+            </p>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function (){
+            let selected=1
+            $("#nav").hide()
+            $("#accordion").hide()
+            $("#k1, #k2, #k3, #k4").hide();
+            $("li").click(function (){
+                selected=$(this).attr("id")
+                $("#k1, #k2, #k3, #k4").hide();
+                $("#k"+selected).show();
+                $("#nav").show()
+                $("#main").hide()
+                $("#accordion").show()
+            })
+            $("#prev").click(function(){
+                selected--;
+                if (selected===0){
+                    selected=4
+                }
+                $("#k1, #k2, #k3, #k4").hide();
+                $("#k"+selected).show();
+                $("#nav").show()
+                $("#main").hide()
+                $("#accordion").show()
+            })
+            $("#next").click(function(){
+                selected++;
+                if (selected===5){
+                    selected=1
+                }
+                $("#k1, #k2, #k3, #k4").hide();
+                $("#k"+selected).show();
+                $("#nav").show()
+                $("#main").hide()
+                $("#accordion").show()
+            })
+            $("#top").click(function(){
+                $("#k1, #k2, #k3, #k4").hide();
+                $("#nav").hide()
+                $("#main").show()
+                $("#accordion").hide()
+            })
+            $(".kopce2").click(function (){
+                $("#dialog").dialog("open")
+                let ttt=$(this).parent().find("p").text()
+                $("#ime").html(ttt)
+            })
+            $( "#dialog" ).dialog({
+                autoOpen: false,
+                width: 400,
+                modal: true,
+                buttons: [
+                    {
+                        text: "Ok",
+                        click: function() {
+                            $( this ).dialog( "close" );
+                        }
+                    },
+                ]
+            });
+            $("#accordion").accordion({
+                collapsible: true,
+                active: false,
+                heightStyle: "content",
+            })
+            $("#accordion h3").off("click").on("click", function(){
+                $(this).next("div").slideToggle()
+                $(this).toggleClass("active")
+            })
+        })
+    </script>
+</body>
+</html>

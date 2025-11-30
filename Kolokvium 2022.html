@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kolokvium 2021</title>
+    <style>
+        ul{
+            display: flex;
+            flex-direction: row;
+        }
+        li{
+            display: inline-block;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid black;
+        }
+        .grid{
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .grid div{
+            margin-right: 30px;
+            border: 1px solid black;
+            text-align: center;
+            height: 150px;
+            width: 250px;
+        }
+    </style>
+    <link rel="stylesheet" href="jquery/jquery-ui.css">
+    <script src="jquery/jquery.js"></script>
+    <script src="jquery/jquery-ui.js"></script>
+</head>
+<body>
+<ul id="main">
+    <li id="1">DJI</li>
+    <li id="2">Parrot</li>
+    <li id="3">YUNEEC</li>
+    <li id="4">ELIOS</li>
+</ul>
+<div id="nav">
+    <button id="prev">prev</button>
+    <button id="top">top</button>
+    <button id="next">next</button>
+</div>
+<div id="k1">
+    <h1>DJI</h1>
+    <p class="add_info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, vero.</p>
+    <div class="grid">
+        <div>
+            <p>Ime vo DJI</p>
+            <img src="#" alt="Slika"><br><br>
+            <button>Add to cart</button>
+            <button class="comment">Comment</button>
+        </div>
+        <div>
+            <p>Ime</p>
+            <img src="#" alt="Slika"><br><br>
+            <button>Add to cart</button>
+            <button class="comment">Comment</button>
+        </div>
+    </div>
+    <div class="grid">
+        <div>
+            <p>Ime</p>
+            <img src="#" alt="Slika"><br><br>
+            <button>Add to cart</button>
+            <button class="comment">Comment</button>
+        </div>
+        <div>
+            <p>Ime</p>
+            <img src="#" alt="Slika"><br><br>
+            <button>Add to cart</button>
+            <button class="comment">Comment</button>
+        </div>
+    </div>
+</div>
+<div id="k2">
+    <h1>Parrot</h1>
+    <p class="add_info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, vero.</p>
+    <div class="grid">
+        <div>
+            <p>Ime vo Parrot</p>
+            <img src="#" alt="Slika"><br><br>
+            <button>Add to cart</button>
+            <button class="comment">Comment</button>
+        </div>
+        <div>
+            <p>Ime</p>
+            <img src="#" alt="Slika"><br><br>
+            <button>Add to cart</button>
+            <button class="comment">Comment</button>
+        </div>
+    </div>
+    <div class="grid">
+        <div>
+            <p>Ime</p>
+            <img src="#" alt="Slika"><br><br>
+            <button>Add to cart</button>
+            <button class="comment">Comment</button>
+        </div>
+        <div>
+            <p>Ime</p>
+            <img src="#" alt="Slika"><br><br>
+            <button>Add to cart</button>
+            <button class="comment">Comment</button>
+        </div>
+    </div>
+</div>
+<div id="k3">
+    <h1>YUNEEC</h1>
+    <p class="add_info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, vero.</p>
+    <div class="grid">
+        <div>
+            <p>Ime vo YUNEEC</p>
+            <img src="#" alt="Slika"><br><br>
+            <button>Add to cart</button>
+            <button class="comment">Comment</button>
+        </div>
+        <div>
+            <p>Ime</p>
+            <img src="#" alt="Slika"><br><br>
+            <button>Add to cart</button>
+            <button class="comment">Comment</button>
+        </div>
+    </div>
+    <div class="grid">
+        <div>
+            <p>Ime</p>
+            <img src="#" alt="Slika"><br><br>
+            <button>Add to cart</button>
+            <button class="comment">Comment</button>
+        </div>
+        <div>
+            <p>Ime</p>
+            <img src="#" alt="Slika"><br><br>
+            <button>Add to cart</button>
+            <button class="comment">Comment</button>
+        </div>
+    </div>
+</div>
+<div id="k4">
+    <h1>ELIOS</h1>
+    <p class="add_info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, vero.</p>
+    <div class="grid">
+        <div>
+            <p>Ime vo ELIOS</p>
+            <img src="#" alt="Slika"><br><br>
+            <button>Add to cart</button>
+            <button class="comment">Comment</button>
+        </div>
+        <div>
+            <p>Ime</p>
+            <img src="#" alt="Slika"><br><br>
+            <button>Add to cart</button>
+            <button class="comment">Comment</button>
+        </div>
+    </div>
+    <div class="grid">
+        <div>
+            <p>Ime</p>
+            <img src="#" alt="Slika"><br><br>
+            <button>Add to cart</button>
+            <button class="comment">Comment</button>
+        </div>
+        <div>
+            <p>Ime</p>
+            <img src="#" alt="Slika"><br><br>
+            <button>Add to cart</button>
+            <button class="comment">Comment</button>
+        </div>
+    </div>
+</div>
+<div id="modal">
+    <p>Rate</p>
+    <input type="text">
+</div>
+<script>
+    $(document).ready(function(){
+        $("#nav").hide();
+        $("#k1, #k2, #k3, #k4").hide();
+        $(".add_info").hide();
+        var selected=1;
+        $("ul>li").click(function (){
+            selected=$(this).attr("id")
+            $("#main").hide()
+            $("#k1, #k2, #k3, #k4").hide();
+            $("#k"+selected).show();
+            $("#nav").show();
+        })
+        $("#prev").click(function (){
+            selected--
+            if (selected===0){
+                selected=4
+            }
+            $("#main").hide()
+            $("#k1, #k2, #k3, #k4").hide();
+            $("#k"+selected).show();
+            $("#nav").show();
+        })
+        $("#next").click(function (){
+            selected++
+            if (selected===5){
+                selected=1
+            }
+            $("#main").hide()
+            $("#k1, #k2, #k3, #k4").hide();
+            $("#k"+selected).show();
+            $("#nav").show();
+        })
+        $("#top").click(function (){
+            $("#k1, #k2, #k3, #k4").hide();
+            $("#nav").hide();
+            $("#main").show();
+        })
+        $( "#modal" ).dialog({
+            autoOpen: false,
+            modal: true,
+            buttons: [
+                {
+                    text: "Submit",
+                    click: function() {
+                        $( this ).dialog( "close" );
+                    }
+                },
+            ]
+        })
+        $(".comment").click(function (){
+            $("#modal").dialog("open")
+        })
+        $("h1").click(function (){
+            $(".add_info").slideToggle();
+        })
+    })
+</script>
+</body>
+</html>

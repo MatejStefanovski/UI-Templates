@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="base">
+    <ul id="movie_names">
+        <li value="0">Oblivion</li>
+        <li value="1">Ender's Game</li>
+        <li value="2">Elysium</li>
+        <li value="3">Egde Of Tomorrow</li>
+    </ul>
+</div>
+<div id="detailed">
+    <button id="prev">prev</button>
+    <button id="top">top</button>
+    <button id="next">next</button>
+    <p>Title:</p>
+    <p id="title"></p>
+    <p>Desc:</p>
+    <p id="desc"></p>
+</div>
+<script>
+    var data = [
+        {
+            value: "oblivion",
+            label: "Oblivion",
+            desc: "A veteran assigned to extract Earth's remaining resources begins to question what he knows about his mission and himself."
+        },
+        {
+            value: "enders-game",
+            label: "Ender's Game",
+            desc: "Young Ender Wiggin is recruited by the International Military to lead the fight against the Formics, a genocidal alien race which nearly annihilated the human race in a previous invasion."
+        },
+        {
+            value: "elysium",
+            label: "Elysium",
+            desc: "In the year 2154, the very wealthy live on a man-made space station while the rest of the population resides on a ruined Earth. A man takes on a mission that could bring equality to the polarized worlds."
+        },
+        {
+            value: "edge-of-tomorrow",
+            label: "Edge of Tomorrow",
+            desc: "A military officer is brought into an alien war against an extraterrestrial enemy who can reset the day and know the future. When this officer is enabled with the same power, he teams up with a Special Forces warrior to try and end the war."
+        }
+    ];
+    $(document).ready(function () {
+        var index = 1;
+        $("#detailed").hide();
+        $("#movie_names li").click(function () {
+            $("#base").hide();
+            $("#detailed").show();
+            index = $(this).attr("value");
+            show_data();
+        })
+        $("#top").click(function () {
+            $("#base").show();
+            $("#detailed").hide();
+        })
+        function show_data(){
+            var movie_data = data[index];
+            $("#title").html(movie_data.label);
+            $("#desc").html(movie_data.desc);
+        }
+        $("#next").click(function () {
+            index++;
+            if(index>3){
+                index=0;
+            }
+            show_data();
+        })
+        $("#prev").click(function () {
+            index--;
+            if(index<0){
+                index=3;
+            }
+            show_data();
+        })
+    })
+</script>
+</body>
+</html>

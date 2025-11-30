@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <title>Title</title>
+    <style>
+        ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            gap: 10px;
+            padding:0;
+            margin: 30px;
+        }
+
+        li {
+            padding: 50px;
+            background-color: slategray;
+            border: 1px black solid;
+            border-radius: 10px;
+        }
+        body{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h2>Memory Game</h2>
+<p>Guess the correct pattern</p>
+<div class="containers">
+    <ul>
+        <li style="background-color: red"></li>
+        <li style="background-color: blue"></li>
+        <li style="background-color: green"></li>
+        <li style="background-color: yellow"></li>
+    </ul>
+    <p>Memorize the colors for 5 seconds...</p>
+</div>
+<div>
+    <input type="text" id="answer" placeholder="ex: Red, Green, Blue..." disabled>
+    <button id="submit" disabled>Check!</button>
+</div>
+</body>
+<script>
+    $(document).ready(function (){
+        setTimeout(function () {
+            $('li').css('background-color','slategray')
+            $('#answer').prop('disabled',false).focus()
+            $('#submit').prop('disabled',false)
+        }, 5000)
+
+        $('#submit').click(function () {
+            let answer=$('#answer').val().toLowerCase().trim()
+
+            if(answer==='red, blue, green, yellow'){
+                alert('CORRECT!!!\n\n\n\n\n\n\nYou have a nice cock');
+            }
+            else{
+                alert('INCORRECT!!!\n\nThe correct sequence was: Red, Blue, Green, Yellow')
+            }
+        })
+    })
+</script>
+</html>
