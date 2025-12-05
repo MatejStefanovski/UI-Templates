@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Temporary</title>
-    <link rel="stylesheet" href="jquery/jquery-ui.css">
-    <script src="jquery/jquery.js"></script>
-    <script src="jquery/jquery-ui.js"></script>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
 </head>
 <style>
     .a{
@@ -258,7 +258,7 @@
             let name=parent.find("p").text();
 
             $("#ime").text(name);
-            $("a").html(name+".com");
+            $("a").html("name.com");
             $("a").attr("href", "https://example.com/");
 
             $("#dialog").dialog("open");
@@ -275,11 +275,6 @@
         // $("#accordion > h3").click(function (){
         //     $(this).next("div").slideToggle()
         // })
-        $("#1").attr("title", "Babolat");
-        $("#2").attr("title", "Babolat");
-        $("#3").attr("title", "Babolat");
-        $("#4").attr("title", "Babolat");
-        $(document).tooltip();
     })
 </script>
 </body>
