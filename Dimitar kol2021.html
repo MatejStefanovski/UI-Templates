@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="jquery/jquery-ui.css">
+  <script src="jquery/jquery.js"></script>
+  <script src="jquery/jquery-ui.js"></script>
+  <style>
+    .item{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      width: 200px;
+      border: 1px solid black;
+      margin: 2px;
+    }
+    .row{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      flex-direction: row;
+    }
+  </style>
+</head>
+<body>
+<div id="osnova">
+  <p id="p1click">proizvoditel1</p>
+  <p id="p2click">proizvoditel2</p>
+  <p id="p3click">proizvoditel3</p>
+</div>
+<div id="change" style="display: none">
+  <button id="prev">prev</button>
+  <button id="next">next</button>
+  <button id="top">top</button>
+</div>
+<div id="_1" style="display: none">
+  <p>proizvoditel 1 info</p>
+  <div class="acordion">
+    <h3>history1</h3>
+    <div>
+      <p>brief history of 1</p>
+    </div>
+    <h3>character1</h3>
+    <div>
+      <p>brief character of 1</p>
+    </div>
+  </div>
+  <div id="p1tiles">
+    <div class="row">
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button claas="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button claas="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button claas="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div id="_2" style="display: none">
+  <p>proizvoditel 2 info</p>
+  <div class="acordion">
+    <h3>history2</h3>
+    <div>
+      <p>brief history of 2</p>
+    </div>
+    <h3>character2</h3>
+    <div>
+      <p>brief character of 2</p>
+    </div>
+  </div>
+  <div id="p2tiles">
+    <div class="row">
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button claas="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button claas="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button claas="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="_3" style="display: none">
+  <p>proizvoditel 3 info</p>
+  <div class="acordion">
+    <h3>history3</h3>
+    <div>
+      <p>brief history of 3</p>
+    </div>
+    <h3>character3</h3>
+    <div>
+      <p>brief character of 3</p>
+    </div>
+  </div>
+  <div id="p3tiles">
+    <div class="row">
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button claas="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button claas="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button claas="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+      <div class="item">
+        <h3>product name</h3>
+        <img src="#" width="200" height="200">
+        <button class="cart">Add to cart</button>
+        <button class="comment">Add comment</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal">
+  <input type="text" id="comment" placeholder="comment">
+</div>
+
+<script>
+  $('#top').click(function () {
+    $('#_1,#_2,#_3,#change').hide()
+    $('#osnova').show()
+  })
+  let current=0;
+  $('#p1click').click(function () {
+    $('#osnova').hide()
+    $('#change').show()
+    $('#_1').show()
+    $('#_2,#_3').hide()
+    current=1
+  })
+  $('#p2click').click(function () {
+    $('#osnova').hide()
+    $('#change').show()
+    $('#_2').show()
+    $('#_1,#_3').hide()
+    current=2
+  })
+  $('#p3click').click(function () {
+    $('#osnova').hide()
+    $('#change').show()
+    $('#_3').show()
+    $('#_2,#_1').hide()
+    current=3
+  })
+  $('#next').click(function () {
+    if(current===3){
+      $('#_1').show()
+      $('#_3').hide()
+      current=1
+    }else{
+      let hideid="#_"+current
+      current++
+      let showid="#_"+current
+      $(hideid).hide()
+      $(showid).show()
+    }
+  })
+
+  $('#prev').click(function () {
+    if(current===1){
+      $('#_1').hide()
+      $('#_3').show()
+      current=3
+    }else{
+      let hideid="#_"+current
+      current--
+      let showid="#_"+current
+      $(hideid).hide()
+      $(showid).show()
+    }
+  })
+
+  $('.acordion').accordion({
+    collapsible:true,
+    active:false,
+    heightStyle:"content",
+  })
+  $('.acordion h3').off('click').on('click',function () {
+    $(this).next("div").slideToggle();
+    $(this).toggleClass("active")
+  })
+
+  $('.comment').click(function () {
+    $("#modal").dialog("open")
+  })
+
+  $("#modal").dialog({
+    autoOpen:false,
+    modal:true,
+    buttons:{
+      "Confirm Comment":function () {
+        $("#modal").dialog("close")
+      }
+    }
+  })
+
+
+</script>
+</body>
+</html>
