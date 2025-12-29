@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        .div_list{
+            display:inline-block;
+            width:250px;
+            vertical-align:top;
+            padding: 15px;
+        }
+        .div_list:first-of-type{
+            border-right: 1px solid black;
+        }
+        ul{
+            list-style-type: none;
+        }
+        li{
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="div_list">
+        <p><strong>Enrolled students:</strong></p>
+        <ul id="enrolled_students">
+            <li>Nikola Nikolov 111111</li>
+            <li>Bojan Nikolov 111112</li>
+            <li>Jovan Nikolov 111113</li>
+            <li>Teo Nikolov 111114</li>
+        </ul>
+        <button id="add">Add new student</button>
+    </div>
+
+    <div class="div_list">
+        <p><strong>Students that took the test:</strong></p>
+        <ul id="test_students">
+            <li title="80">Nikola Nikolov 111111</li>
+            <li title="50">Bojan Nikolov 111112</li>
+        </ul>
+    </div>
+
+    <div id="modal_student">
+        <p>Enter student name:</p>
+        <input type="text" id="st_name">
+        <p>Enter student index:</p>
+        <input type="text" id="st_index">
+    </div>
+
+    <div id="modal_points">
+        <p>Enter student points:</p>
+        <input type="text" id="st_points">
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#modal_student").dialog({
+                autoOpen: false,
+                modal: true,
+                buttons: {
+                    Add : function () {
+                        var student_name = $("#st_name").val();
+                        var student_id = $("#st_index").val();
+                        $("#enrolled_students").append("<li>" + student_name + " " + student_id + "</li>");
+                        $("#modal_student").dialog("close");
+                    }
+                }
+            });
+            $("#modal_points").dialog({
+                autoOpen: false,
+                modal: true,
+                buttons: {
+                    Add : function () {
+                        var student_points = $("#st_points").val();
+                        $transfer_student.attr("title", student_points);
+                        $transfer_student.tooltip();
+                        $("#modal_points").dialog("close");
+                    }
+                }
+            });
+            $("#add").click(function(){
+                $("#modal_student").dialog("open");
+            });
+            $("#enrolled_students").sortable({
+                connectWith: "#test_students",
+            }).disableSelection();
+            $("#test_students").sortable({
+                receive: function(event, ui) {
+                    $transfer_student = $(ui.item);
+                    $("#modal_points").dialog("open");
+                }
+            }).disableSelection();
+            $("#test_students li").tooltip();
+        })
+    </script>
+</body>
+</html>
