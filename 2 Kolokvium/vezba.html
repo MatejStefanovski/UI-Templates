@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        ul{
+            list-style-type: none;
+        }
+        body{
+            display: flex;
+            flex-direction: row;
+        }
+        #div1{
+            display: flex;
+            width: 49%;
+            flex-direction: column;
+        }
+        #sliki{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 49%;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <button id="add">Add new movie</button>
+        <ul id="movies"> </ul>
+        <p>Title : <span id="title"></span></p>
+        <p>ImdbID : <span id="id"></span></p>
+        <p>Rating : <span id="rating"></span></p>
+        <p>Director : <span id="dir"></span></p>
+        <p>Actors : <span id="actors"></span></p>
+        <img src="" id="poster">
+        <div id="dialog_movie">
+            <p>Movie title:</p>
+            <input type="text" id="movie_title">
+        </div>
+    </div>
+    <div id="sliki">
+        <p>Sliki:</p>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $("#dialog_movie").dialog({
+                modal: true,
+                autoOpen: false,
+                buttons: {
+                    "OK":function (){
+                        var movie = $("#movie_title").val();
+                        $("<li>").html(movie).appendTo("#movies");
+                        $(this).dialog("close");
+                    }
+                }
+            })
+            $("#add").click(function(){
+                $("#dialog_movie").dialog("open");
+            })
+            $("#movies").on("click", "li", function(){
+                var movie = $(this).text();
+                getData(movie);
+            });
+            let currentPoster = "";
+            function getData(movie_title){
+                $.ajax({
+                    url: "https://www.omdbapi.com/?apikey=a6592a8d&t="+movie_title,
+                    dataType: 'json',
+                    success: function(data){
+                        $("#title").html(data["Title"])
+                        $("#id").html(data["imdbRating"])
+                        $("#rating").html(data["imdbRating"])
+                        $("#dir").html(data["Director"])
+                        $("#actors").html(data["Actors"])
+                        $("#poster").attr("src", data["Poster"])
+                        currentPoster = data["Poster"];
+                    }
+                })
+            }
+            $("#poster").on("click", function(){
+                $("<img>").attr("src", currentPoster).css("width","300px").css("height","300px").appendTo("#sliki");
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kolokvium 2016</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        #btn1{
+            height: 40px;
+            display: block;
+        }
+        #lista{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 500px;
+        }
+        #lista div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            height: 500px;
+            background-color: #1c94c4;
+            border: 1px solid black;
+            flex-direction: column;
+        }
+        #social_links ul{
+            list-style-type: none;
+            display: flex;
+
+        }
+        #social_links ul li{
+            border: 1px solid black;
+            margin: 5px;
+        }
+        #knigi{
+            display: flex;
+            flex-direction: column;
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <p id="isbn" style="display: inline-block">ISBN: </p>
+    <input type="text" placeholder="ISBN" id="input">
+    <button id="btn1">Add book</button>
+    <div id="lista">
+        <div>
+            <p>Knigi</p>
+            <ul id="knigi">
+
+            </ul>
+        </div>
+        <div>
+            <p>ISBN: <span id="isbn1"></span></p>
+            <p>Slika:</p><img id="slika" src="">
+            <p>info_url: <span id="info_url"></span></p>
+            <p>publishers: <span id="publishers"></span></p>
+        </div>
+    </div>
+    <div id="social_links">
+        <ul>
+            <li>Facebook</li>
+            <li>Twitter</li>
+            <li>Instagram</li>
+            <li>Reddit</li>
+        </ul>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#btn1").click(function () {
+                var isbn = $("#input").val();
+                if (isbn.length !== 10 && isbn.length !== 13) {
+                    alert("ISBN мора да има 10 или 13 цифри");
+                    return;
+                }
+                $.ajax({
+                    url: "https://openlibrary.org/api/books?bibkeys=ISBN:" + isbn + "&jscmd=details&callback=mycallback",
+                    dataType: "jsonp",
+                    success: function (data) {
+                        var key = "ISBN:" + isbn;
+                        if (!data[key]) {
+                            alert("Книгата не е пронајдена");
+                            return;
+                        }
+                        var bookObj = data[key];
+                        var details = bookObj.details;
+                        var li = $("<li>").text(details.title).data("book", bookObj);
+                        $("#knigi").append(li);
+                    }
+                });
+            });
+            $("#knigi").on("click", "li", function () {
+                var book = $(this).data("book");
+                $("#isbn1").text(book.details.isbn_13);
+                $("#slika").attr("src", book.thumbnail_url);
+                $("#info_url").attr("href", book.info_url).text(book.info_url);
+                $("#publishers").text(book.details.publishers.join(", "));
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kolokvium 2021</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #container {
+            display: flex;
+            gap: 30px;
+        }
+        #dates, #comics {
+            width: 50%;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        li:hover {
+            background-color: #f0f0f0;
+        }
+        .details {
+            margin-top: 10px;
+            padding: 10px;
+            background: #fafafa;
+            display: none;
+        }
+        .social a {
+            margin-right: 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h2>Избор на датум</h2>
+
+<div id="container">
+    <!-- Листа со датуми -->
+    <div id="dates">
+        <ul id="dateList">
+            <li data-date="2016-01-20">2016-01-20</li>
+            <li data-date="2016-01-27">2016-01-27</li>
+            <li data-date="2016-02-03">2016-02-03</li>
+            <li data-date="2016-02-10">2016-02-10</li>
+            <li data-date="2016-02-17">2016-02-17</li>
+        </ul>
+    </div>
+
+    <!-- Листа со стрипови -->
+    <div id="comics">
+        <ul id="comicList"></ul>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $("#dateList li").click(function () {
+            let date = $(this).data("date");
+            $("#comicList").empty();
+            let url = "https://cors-anywhere.herokuapp.com/https://api.shortboxed.com/comics/v1/release_date/" + date;
+            $.getJSON(url, function (data) {
+                $.each(data.comics, function (i, comic) {
+                    let li = $("<li>").text(comic.title + " - $" + comic.price).data("comic", comic);
+                    let details = $("<div class='details'>")
+                        .append("<p><b>Description:</b> " + comic.description + "</p>")
+                        .append("<p><b>Creators:</b> " + comic.creators + "</p>")
+                        .append(`
+                        <div class="social">
+                            <a href="#">Facebook</a>
+                            <a href="#">Twitter</a>
+                            <a href="#">Instagram</a>
+                        </div>
+                    `);
+
+                    li.append(details);
+
+                    li.click(function () {
+                        $(this).find(".details").slideToggle();
+                    });
+
+                    $("#comicList").append(li);
+                });
+            });
+        });
+    });
+</script>
+</body>
+</html>
