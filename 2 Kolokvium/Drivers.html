@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Drivers</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        ul{
+            list-style-type: none;
+            border: 1px solid black;
+            margin: 15px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            width: 32%;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex; flex-direction: row; justify-content: space-around;">
+        <ul id="prva">
+
+        </ul>
+        <ul id="vtora">
+
+        </ul>
+        <ul id="treta">
+
+        </ul>
+    </div>
+    <div id="details" style="margin:20px; border:1px solid black; padding:15px; display: block">
+        <h3>Driver details</h3>
+        <div id="detailsContent">Select a favorite driver</div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            function loadDrivers(season, listID){
+                $.ajax({
+                    url:"https://api.jolpi.ca/ergast/f1/"+season+"/drivers/",
+                    datatype: "json",
+                    success: function(data){
+                        let drivers = data.MRData.DriverTable.Drivers;
+                        $.each(drivers, function(index, d){
+                            let name = d.givenName;
+                            let family_name = d.familyName;
+                            let li = $("<li>").text(name+" "+family_name).data("driver", d);
+                            $("#"+listID).append(li);
+                        })
+                    }
+                })
+            }
+            loadDrivers(2016, "prva");
+            loadDrivers(2017, "vtora");
+            $("ul").sortable({
+                connectWith: "ul",
+                placeholder: "ui-state-highlight"
+            }).disableSelection();
+            $("#treta").on("click", "li", function () {
+                $(".details").remove();
+                let d = $(this).data("driver");
+                let c = $("<li class='details'>").html(`
+                    <p><b>Name:</b> ${d.givenName} ${d.familyName}</p>
+                    <p><b>Permanent number:</b> ${d.permanentNumber || "N/A"}</p>
+                    <p><b>Date of birth:</b> ${d.dateOfBirth}</p>
+                    <p><b>Nationality:</b> ${d.nationality}</p>
+                    <p><a href="${d.url}" target="_blank">Biography</a></p>
+                `);
+                $(this).after(c);
+            });
+        })
+    </script>
+</body>
+</html>
