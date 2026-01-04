@@ -36,7 +36,36 @@
     </div>
     <script>
         $(document).ready(function(){
-
+            function get_data(season, listID){
+                $.ajax({
+                    url:"https://api.jolpi.ca/ergast/f1/"+season+"/drivers/",
+                    datatype: "json",
+                    success: function(data){
+                        let drivers = data.MRData.DriverTable.Drivers;
+                        for(let i = 0; i < drivers.length; i++){
+                            $("<li>").text(drivers[i].givenName+" "+drivers[i].familyName).
+                                appendTo("#"+listID).data("driver", drivers[i]);
+                        }
+                    }
+                })
+            }
+            get_data(2016, "prva")
+            get_data(2017, "vtora")
+            $("ul").sortable({
+                connectWith: "ul",
+            }).disableSelection();
+            $("#treta").on("click", "li", function(){
+                $(".details").remove();
+                let d = $(this).data("driver");
+                let c = $("<li class='details'>").html(`
+                    <p><b>Name: </b>${d.givenName} ${d.familyName}</p>
+                    <p><b>Permanent number: </b> ${d.permanentNumber || "N/A"}</p>
+                    <p><b>Date of birth: </b> ${d.dateOfBirth}</p>
+                    <p><b>Nationality: </b> ${d.nationality}</p>
+                    <p><a href="${d.url}" target="_blank">Biography</a></p>
+                `);
+                $(this).after(c)
+            })
         })
     </script>
 </body>
