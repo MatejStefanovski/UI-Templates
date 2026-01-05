@@ -7,66 +7,61 @@
     <script src="../jquery/jquery.js"></script>
     <script src="../jquery/jquery-ui.js"></script>
     <style>
-        ul{
-            list-style-type: none;
-            border: 1px solid black;
-            margin: 15px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            width: 32%;
+        .camera-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
         }
     </style>
 </head>
 <body>
-    <div style="display: flex; flex-direction: row; justify-content: space-around;">
-        <ul id="prva">
-
-        </ul>
-        <ul id="vtora">
-
-        </ul>
-        <ul id="treta">
-
-        </ul>
-    </div>
-    <div id="details" style="margin:20px; border:1px solid black; padding:15px; display: block">
-        <h3>Driver details</h3>
-        <div id="detailsContent">Select a favorite driver</div>
-    </div>
+    <h1>Camera List</h1>
+    <div id="cameras"></div>
+    <button id="load">Load more</button>
     <script>
-        $(document).ready(function(){
-            function get_data(season, listID){
-                $.ajax({
-                    url:"https://api.jolpi.ca/ergast/f1/"+season+"/drivers/",
-                    datatype: "json",
-                    success: function(data){
-                        let drivers = data.MRData.DriverTable.Drivers;
-                        for(let i = 0; i < drivers.length; i++){
-                            $("<li>").text(drivers[i].givenName+" "+drivers[i].familyName).
-                                appendTo("#"+listID).data("driver", drivers[i]);
-                        }
-                    }
-                })
+        let limit = 2;
+        let offset = 0;
+        let loading = false;
+        function get_data() {
+            if (loading) return;
+            loading = true;
+            $.ajax({
+                url: `http://127.0.0.1:8000/cameras/?limit=${limit}&offset=${offset}`,
+                dataType: 'json',
+                success: function (data) {
+                    offset += limit;
+
+                    $.each(data.results, function (index, item) {
+                        $('<div>')
+                            .addClass('camera-item')
+                            .attr('color', item.color)
+                            .attr('model', item.model)
+                            .html(`
+                                <p>Model: ${item.model}</p>
+                                <p>Color: ${item.color}</p>
+                                <p>
+                                    <button class="details-btn">Details</button>
+                                </p>
+                            `)
+                            .appendTo('#cameras');
+                    });
+
+                    loading = false;
+                }
+            });
+        }
+        get_data();
+        $('#load').click(function () {
+            get_data();
+        });
+        $(window).scroll(function () {
+            if (
+                $(window).scrollTop() + $(window).height() >=
+                $(document).height() - 50
+            ) {
+                get_data();
             }
-            get_data(2016, "prva")
-            get_data(2017, "vtora")
-            $("ul").sortable({
-                connectWith: "ul",
-            }).disableSelection();
-            $("#treta").on("click", "li", function(){
-                $(".details").remove();
-                let d = $(this).data("driver");
-                let c = $("<li class='details'>").html(`
-                    <p><b>Name: </b>${d.givenName} ${d.familyName}</p>
-                    <p><b>Permanent number: </b> ${d.permanentNumber || "N/A"}</p>
-                    <p><b>Date of birth: </b> ${d.dateOfBirth}</p>
-                    <p><b>Nationality: </b> ${d.nationality}</p>
-                    <p><a href="${d.url}" target="_blank">Biography</a></p>
-                `);
-                $(this).after(c)
-            })
-        })
+        });
     </script>
 </body>
 </html>

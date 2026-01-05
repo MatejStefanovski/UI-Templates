@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Predist a person by it's name</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        p{
+            font-size: 16px;
+        }
+        input, button{
+            border: 1px solid black;
+            margin: 15px;
+            padding: 10px;
+        }
+        .asd{
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <p>Enter a name:</p>
+    <input type="text" id="name">
+    <button id="btn">Enter</button>
+    <p>Nationality: <ul id="nat"></ul></p>
+    <script>
+        $(document).ready(function () {
+            $("#btn").click(function () {
+                let ime = $("#name").val();
+                $("<p>").text(ime).addClass("asd").appendTo("#nat");
+                get_data(ime);
+            })
+            function get_data(ime){
+                $.ajax({
+                    url: "https://api.nationalize.io/?name="+ime,
+                    dataType: 'json',
+                    success: function (data) {
+                        let country = data.country;
+                        $("<li>").text(country[0].country_id).appendTo("#nat");
+                        for (let i=0; i<country.length; i++) {
+                            $("<li>").text(country[i].country_id).appendTo("#nat");
+                        }
+                    }
+                })
+            }
+        })
+    </script>
+</body>
+</html>

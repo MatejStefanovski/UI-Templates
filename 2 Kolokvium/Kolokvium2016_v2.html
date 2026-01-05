@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vezba</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        p, input, button{
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
+        }
+        #books{
+            display: flex;
+            flex-direction: row;
+        }
+        #l1, #l2{
+            width: 49%;
+            border: 1px solid black;
+        }
+        #social_links{
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
+</head>
+<body>
+<p>ISBN: </p>
+<input id="isbn" type="text">
+<button id="btn">Add Book</button>
+<div id="books">
+    <ul id="l1">
+
+    </ul>
+    <div id="l2">
+
+    </div>
+</div>
+<div id="social_links">
+    <p>Facebook</p>
+    <p>Twitter</p>
+    <p>Instagram</p>
+    <p>YouTube</p>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#btn").click(function () {
+            let t = $("#isbn").val();
+            get_data(t)
+        })
+        function get_data(isbn){
+            $.ajax({
+                url: "https://openlibrary.org/api/books?bibkeys=ISBN:"+isbn+"&jscmd=details&callback=mycallback",
+                dataType: "jsonp",
+                success: function (data){
+                    let key = "ISBN:" + isbn;
+                    let book = data[key];
+                    let title = book.details.title;
+                    $("<li>").append(title).appendTo("#l1").data("book", book);
+                }
+            })
+        }
+        $("#l1").on("click", "li", function () {
+            let book = $(this).data("book");
+            $("<p>").text(book.details.title).appendTo("#l2");
+            $("<p>").text(book.details.isbn_13[0]).appendTo("#l2");
+            $("<img>").attr("src", book.thumbnail_url).appendTo("#l2");
+        })
+    })
+</script>
+</body>
+</html>
