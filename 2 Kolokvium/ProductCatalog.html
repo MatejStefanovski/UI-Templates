@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Catalog Viewer</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        #main{
+            display: flex;
+            flex-direction: row;
+        }
+        #main div{
+            width: 49%;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div id="div1">
+            <p>beauty</p>
+            <p>furniture </p>
+            <p>fragrances</p>
+            <p>groceries</p>
+        </div>
+        <div id="div2">
+
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            function get_data(category){
+                $.ajax({
+                    url: "https://dummyjson.com/products/category/" + category,
+                    dataType: "json",
+                    success: function(data){
+                        let dt = data.products;
+                        for (let i=0; i<dt.length; i++){
+                            $("<p>").html(
+                                dt[i].title + " " + dt[i].price
+                            ).data("cat", dt[i]).appendTo("#div2")
+                        }
+                    }
+                })
+            }
+            $("#div1").on("click", "p", function(){
+                let value = $(this).text();
+                $("#div2").empty();
+                get_data(value);
+            })
+            $("#div2").on("click", "p", function(){
+                if ($(this).find(".details").length){
+                    $(this).find(".details").remove();
+                    return;
+                }
+                let cat = $(this).data("cat")
+                let inlay = $("<p class='details'>").html(
+                    "Brend: " + cat.brand + "<br>" +
+                    "Description: " + cat.description
+                ).css("border", "1px solid black");
+                $(this).append(inlay)
+            })
+        })
+    </script>
+</body>
+</html>

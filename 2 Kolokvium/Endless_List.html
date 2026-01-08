@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Endless List</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        .camera-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+<h1>Camera List</h1>
+<div id="cameras"></div>
+<button id="load">Load more</button>
+<script>
+    let limit = 2;
+    let offset = 0;
+    let loading = false;
+    function get_data() {
+        if (loading) return;
+        loading = true;
+        $.ajax({
+            url: `http://127.0.0.1:8000/cameras/?limit=${limit}&offset=${offset}`,
+            dataType: 'json',
+            success: function (data) {
+                offset += limit;
+
+                $.each(data.results, function (index, item) {
+                    $('<div>')
+                        .addClass('camera-item')
+                        .attr('color', item.color)
+                        .attr('model', item.model)
+                        .html(`
+                                <p>Model: ${item.model}</p>
+                                <p>Color: ${item.color}</p>
+                                <p>
+                                    <button class="details-btn">Details</button>
+                                </p>
+                            `)
+                        .appendTo('#cameras');
+                });
+
+                loading = false;
+            }
+        });
+    }
+    get_data();
+    $('#load').click(function () {
+        get_data();
+    });
+    $(window).scroll(function () {
+        if (
+            $(window).scrollTop() + $(window).height() >=
+            $(document).height() - 50
+        ) {
+            get_data();
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Open Library – Java Books</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #cameras {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .book-item {
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .book-item p {
+            margin: 5px 0;
+        }
+        .details-btn {
+            padding: 6px 12px;
+            border: none;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .details-btn:hover {
+            background: #0056b3;
+        }
+        #load {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 16px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Java Books (Open Library)</h1>
+    <div id="cameras"></div>
+    <button id="load">Load More</button>
+    <script>
+        let limit = 10;
+        let offset = 0;
+        let loading = false;
+        function get_data() {
+            if (loading) return;
+            loading = true;
+            $.ajax({
+                url: "https://openlibrary.org/search.json?q=java&limit=" + limit + "&offset=" + offset,
+                dataType: "json",
+                success: function (data) {
+                    offset += limit;
+                    $.each(data.docs, function (index, item) {
+                        $("<div>")
+                            .addClass("book-item")
+                            .html(`
+                    <p><strong>Title:</strong> ${item.title ?? "N/A"}</p>
+                    <p><strong>Author:</strong> ${item.author_name ? item.author_name.join(", ") : "Unknown"}</p>
+                    <p><strong>Year:</strong> ${item.first_publish_year ?? "N/A"}</p>
+                    <p><button class="details-btn">Details</button></p>
+                  `).appendTo("#cameras");
+                    });
+                    loading = false;
+                },
+                error: function () {
+                    loading = false;
+                }
+            });
+        }
+        get_data();
+        $("#load").click(function () {
+            get_data();
+        });
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() >= $(document).height() - 250) {
+                get_data();
+            }
+        });
+    </script>
+</body>
+</html>

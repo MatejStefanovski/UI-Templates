@@ -7,60 +7,61 @@
     <script src="../jquery/jquery.js"></script>
     <script src="../jquery/jquery-ui.js"></script>
     <style>
-        .camera-item {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin: 10px 0;
+        ul{
+            display: inline-block;
+            margin: 25px;
+            list-style-type: none;
+            width: 40%;
+            border: 1px solid black;
         }
     </style>
 </head>
 <body>
-    <h1>Camera List</h1>
-    <div id="cameras"></div>
-    <button id="load">Load more</button>
+    <div style="display: flex; flex-direction: row">
+        <ul id="left">
+            <li poeni="30" indexche="111111">
+                <input type="checkbox"> Student 1
+            </li>
+        </ul>
+        <div>
+            <button id="to_right">>></button>
+            <button id="to_left"><<</button>
+        </div>
+        <ul id="right">
+            <li poeni="85" indexche="111115">
+                <input type="checkbox"> Student 2
+            </li>
+        </ul>
+    </div>
     <script>
-        let limit = 2;
-        let offset = 0;
-        let loading = false;
-        function get_data() {
-            if (loading) return;
-            loading = true;
-            $.ajax({
-                url: `http://127.0.0.1:8000/cameras/?limit=${limit}&offset=${offset}`,
-                dataType: 'json',
-                success: function (data) {
-                    offset += limit;
-
-                    $.each(data.results, function (index, item) {
-                        $('<div>')
-                            .addClass('camera-item')
-                            .attr('color', item.color)
-                            .attr('model', item.model)
-                            .html(`
-                                <p>Model: ${item.model}</p>
-                                <p>Color: ${item.color}</p>
-                                <p>
-                                    <button class="details-btn">Details</button>
-                                </p>
-                            `)
-                            .appendTo('#cameras');
-                    });
-
-                    loading = false;
-                }
-            });
-        }
-        get_data();
-        $('#load').click(function () {
-            get_data();
-        });
-        $(window).scroll(function () {
-            if (
-                $(window).scrollTop() + $(window).height() >=
-                $(document).height() - 50
-            ) {
-                get_data();
+        $(document).ready(function () {
+            function get_data(){
+                $.ajax({
+                    url: "https://openlibrary.org/search.json?q=java&limit=5&offset=0",
+                    dataType: "json",
+                    success: function (data){
+                        let dt = data.docs;
+                        for (let i = 0; i < dt.length; i++) {
+                            let li = $("<li>");
+                            li.attr("poeni", dt[i].edition_count);
+                            li.attr("indexche", dt[i].key);
+                            let checkbox = $("<input>").attr("type", "checkbox");
+                            li.append(checkbox).append(" " + dt[i].title);
+                            $("#left").append(li);
+                        }
+                    }
+                })
             }
+            get_data();
+            $("#to_right, #to_left").click(function () {
+                let target = $(this).is("#to_right") ? "#right" : "#left";
+                $('ul [type=checkbox]:checked').each(function () {
+                    $(this)
+                        .prop('checked', false)
+                        .parent()
+                        .appendTo(target);
+                });
+            });
         });
     </script>
 </body>

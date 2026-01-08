@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coockbook</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        #main{
+            display: flex;
+            flex-direction: row;
+        }
+        #main div{
+            border: 1px solid black;
+            width: 32%;
+        }
+        ul{
+            list-style-type: none;
+        }
+        .preview {
+            position: absolute;
+            border: 1px solid black;
+            background: white;
+        }
+        .preview img {
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div id="list1">
+            <p id="Italian">Italijanska</p>
+            <p id="Indian">Indiska</p>
+            <p id="American">Amerikanska</p>
+            <p id="Asian">Aziska</p>
+        </div>
+        <div id="list2">
+
+        </div>
+        <div id="fav">
+
+        </div>
+    </div>
+<script>
+    $(document).ready(function () {
+        function get_data(tip){
+            $.ajax({
+                url: "https://dummyjson.com/recipes/tag/"+tip,
+                datatype: "json",
+                success: function(data){
+                    let dt = data.recipes;
+                    for (let i = 0; i < dt.length; i++) {
+                        $("<p>").html(dt[i].name + " " + dt[i].difficulty).appendTo("#list2").data("food", dt[i]);
+                    }
+                }
+            })
+        }
+        $("#list1 p").click(function () {
+            let tip = $(this).attr("id");
+            $("#list2").empty();
+            get_data(tip);
+        })
+        $("#list2").on("click", "p", function () {
+            if ($(this).find(".details").length) {
+                $(this).find(".details").remove();
+                return;
+            }
+            let tip = $(this).data("food");
+            let ingredients = tip.ingredients.join(", ");
+            let ap = $("<div class='details'>").html(
+                "Minuti: " + tip.prepTimeMinutes + "<br>" +
+                "Kalorii: " + tip.caloriesPerServing + "<br>" +
+                "Sostojki: " + ingredients
+            ).css("border", "1px solid black");
+            $(this).append(ap);
+        })
+        $("#fav").sortable({
+            connectWith: "#list2",
+        })
+        $("#list2").sortable({
+            connectWith: "#fav",
+        })
+        $("#list2").on("mouseenter", "p", function (e) {
+            $("<div class='preview'>")
+                .append("<img src='" + $(this).data('food').image + "'>")
+                //.css({ top: e.pageY + 10, left: e.pageX + 10 })
+                .appendTo("body");
+        });
+
+        $("#list2").on("mouseleave", "p", function () {
+            $(".preview").remove();
+        });
+    })
+</script>
+</body>
+</html>
