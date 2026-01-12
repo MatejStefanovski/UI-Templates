@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Endless Kolokvium</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        #container{
+            display: flex;
+            flex-direction: row;
+        }
+        #container div{
+            flex: 1;
+            padding: 5px;
+            margin: 5px;
+            border: 1px solid black;
+        }
+        #div2{
+            height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="div1">
+            <p>Python</p>
+            <p>Java</p>
+            <p>JavaScript</p>
+            <p>Kotlin</p>
+        </div>
+        <div id="div2">
+            <div id="loadingSpinner" style="display: none;">
+                <img src="../jquery/images/ui-icons_ffd27a_256x240.png" height="50px" width="50px"/>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            let limit = 5;
+            let offset = 0;
+            let t = "";
+            let loading = false
+            function get_data(lang){
+                if (loading) return;
+                loading = true;
+                $('#loadingSpinner').show();
+                $.ajax({
+                    url: "https://openlibrary.org/search.json?q="+lang+"&limit=5&offset="+offset,
+                    dataType: "json",
+                    success: function(data){
+                        offset+=limit
+                        let dt = data.docs;
+                        for (let i=0; i<dt.length; i++){
+                           $("<p>").text(dt[i].title).data("book", dt[i]).appendTo("#div2");
+                        }
+                        $('#loadingSpinner').hide();
+                        loading = false;
+                    }
+                })
+            }
+            $("#div1").on("click", "p", function(){
+                t = $(this).text();
+                $("#div2 p").remove();
+                offset=0;
+                get_data(t);
+            })
+            $("#div2").scroll(function (){
+                if (t === "") return;
+
+                if (
+                    $("#div2").scrollTop() + $("#div2").innerHeight() >=
+                    $("#div2")[0].scrollHeight - 50
+                ){
+                    get_data(t);
+                }
+            });
+        })
+    </script>
+</body>
+</html>

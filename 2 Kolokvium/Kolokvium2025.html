@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kolokvium 2025</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        #paneli{
+            display: flex;
+            flex-direction: row;
+        }
+        #paneli div{
+            width: 49%;
+            border: 1px solid black;
+            padding: 5px;
+        }
+        ul{
+            list-style-type: none;
+        }
+        #fav{
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="paneli">
+        <div id="div1">
+            <ul id="prog">
+                <li>Python</li>
+                <li>Java</li>
+                <li>JavaScript</li>
+                <li>Kotlin</li>
+            </ul>
+        </div>
+        <div id="div2">
+            <p>Knigi: <span id="vkupno">0</span></p>
+            <br>
+            <ul id="div2_2">
+
+            </ul>
+            <button id="btn">Load more</button>
+        </div>
+    </div>
+    <div id="div3">
+        <p>Favourite Knigi</p>
+        <ul id="fav">
+
+        </ul>
+    </div>
+    <script>
+        $(document).ready(function () {
+            function get_data(prog, offset){
+                $.ajax({
+                    url: "https://openlibrary.org/search.json?q="+prog+"&limit=5&offset="+offset,
+                    dataType: "json",
+                    success: function (data){
+                        $("#vkupno").text(data.numFound);
+                        let knigi = data.docs;
+                        for (let i=0; i<knigi.length; i++){
+                            let det = $("<div>")
+                                .css("display","none")
+                                .html(
+                                    "Author: " + (knigi[i].author_name || []).join(", ") + "<br>" +
+                                    "Year: " + (knigi[i].first_publish_year || "-") + "<br>" +
+                                    "Publisher: " + (knigi[i].publisher || [])[0]
+                                );
+                            let li = $("<li>").text(knigi[i].title).data("kniga", knigi[i]);
+                            li.append(det);
+                            $("#div2_2").append(li);
+                        }
+                    }
+                })
+            }
+            let counter = 0;
+            let value = ""
+            $("#prog").on("click", "li", function(){
+                $("#div2_2").empty();
+                value = $(this).text();
+                counter = 0;
+                get_data(value, counter);
+                counter += 5;
+            });
+            $("#btn").click(function () {
+                get_data(value, counter);
+                counter += 5;
+            })
+            $("#div2_2").on("click", "li", function () {
+                $(this).children("div").toggle();
+            });
+            $("#fav").sortable({
+                connectWith: "#div2_2",
+            })
+            $("#div2_2").sortable({
+                connectWith: "#fav",
+            })
+        })
+    </script>
+</body>
+</html>
